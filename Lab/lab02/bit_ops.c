@@ -5,23 +5,32 @@
 // Assume 0 <= n <= 31
 unsigned get_bit(unsigned x,
                  unsigned n) {
-    // YOUR CODE HERE
-    // Returning -1 is a placeholder (it makes
-    // no sense, because get_bit only returns 
-    // 0 or 1)
-    return -1;
+    unsigned temp = (x >> n) & 1;
+    return temp;
 }
 // Set the nth bit of the value of x to v.
 // Assume 0 <= n <= 31, and v is 0 or 1
 void set_bit(unsigned * x,
              unsigned n,
              unsigned v) {
-    // YOUR CODE HERE
+    if(v == 1){
+		*x = *x | (1 << n);
+	}else{
+		*x = *x & ~(1 << n); // ~(1 << n) 生成一个掩码：第n位为0，其他位为1
+	}
 }
 // Flip the nth bit of the value of x.
 // Assume 0 <= n <= 31
 void flip_bit(unsigned * x,
               unsigned n) {
-    // YOUR CODE HERE
+	//用xor更优美 和1异或去反 和0异或不变
+	*x = *x ^ (1 << n);
+	
+	//不优美
+    // if( (*x >> n) & 1){//1 -> 0
+	// 	*x = *x & ~(1 << n);
+	// }else{//0 -> 1
+	// 	*x = *x | (1 << n);
+	// }
 }
 
