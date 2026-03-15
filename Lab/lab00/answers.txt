@@ -1,4 +1,20 @@
-1.
-2.
-3.
-4.
+1.在文件层次搜索关键命令
+	1. grep -r "keyword" /path/to/search 
+2.	显示进程信息的命令
+	ps aux            # 显示所有用户的所有进程
+	ps -ef             # 显示完整格式的进程信息
+	ps -e --forest     # 显示进程树
+	top             # 实时显示进程信息
+	htop            # top的增强版本（需要安装）
+	pgrep firefox   # 显示firefox的进程ID
+3.终止进程的命令
+	kill 1234       # 正常终止进程ID为1234的进程
+	kill -9 1234    # 强制终止（SIGKILL信号）
+	kill -15 1234   # 优雅终止（默认信号）
+	killall firefox # 终止所有firefox进程
+4.比较两个文件差异的命令
+	diff file1.txt file2.txt     # 显示两个文件的差异
+	diff -u file1.txt file2.txt   # 统一格式输出（更易读）
+	diff -c file1.txt file2.txt   # 上下文格式输出	
+	vimdiff file1.txt file2.txt   # 在vim编辑器中并排显示差异
+	

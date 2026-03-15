@@ -11,8 +11,8 @@ typedef struct Color
 typedef struct Image
 {
 	Color **image;
-	uint32_t rows;
-	uint32_t cols;
+	uint32_t rows;//行
+	uint32_t cols;//列
 } Image;
 
 //Loads an image from a ppm file, and converts to an Image object
