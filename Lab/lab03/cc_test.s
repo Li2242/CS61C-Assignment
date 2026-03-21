@@ -14,26 +14,26 @@ main:
     # into a few saved registers - if any of these are modified
     # after these functions return, then we know calling
     # convention was broken by one of these functions
-    li s0, 2623
-    li s1, 2910
+    li s0, 2623 #s0 = 2623 
+    li s1, 2910 #s1 = 2910
     # ... skipping middle registers so the file isn't too long
     # If we wanted to be rigorous, we would add checks for
     # s2-s20 as well
-    li s11, 134
+    li s11, 134 #s11 = 134
     # Now, we call some functions
     # simple_fn: should return 1
     jal simple_fn # Shorthand for "jal ra, simple_fn"
-    li t0, 1
-    bne a0, t0, failure
+    li t0, 1 # t0 = 1
+    bne a0, t0, failure # a0 ！= t0 跳
     # naive_pow: should return 2 ** 7 = 128
-    li a0, 2
-    li a1, 7
+    li a0, 2 # a0 = 2
+    li a1, 7 # a1 = 7
     jal naive_pow
-    li t0, 128
+    li t0, 128 #t0 = 128
     bne a0, t0, failure
     # inc_arr: increments "array" in place
-    la a0, array
-    li a1, 5
+    la a0, array #a0 = &array
+    li a1, 5     #a1 = 5
     jal inc_arr
     jal check_arr # Verifies inc_arr and jumps to "failure" on failure
     # Check the values in the saved registers for sanity
@@ -55,9 +55,9 @@ main:
 # FIXME Fix the reported error in this function (you can delete lines
 # if necessary, as long as the function still returns 1 in a0).
 simple_fn:
-    mv a0, t0
-    li a0, 1
-    ret
+    # mv a0, t0 # a0 = t0 没用删了
+    li a0, 1    # a0 = 1
+    ret         # 返回
 
 # Computes a0 to the power of a1.
 # This is analogous to the following C pseudocode:
@@ -76,8 +76,11 @@ simple_fn:
 # missing. Another hint: what does the "s" in "s0" stand for?
 naive_pow:
     # BEGIN PROLOGUE
+	addi sp, sp, -8
+	sw   s0, 0(sp)
+	sw   ra, 4(sp)# naive_pow 其实不用保存 ra，因为它不再调用其他函数；你现在保存了也没错，只是略冗余。
     # END PROLOGUE
-    li s0, 1
+    li s0, 1 # s0 = 1 
 naive_pow_loop:
     beq a1, zero, naive_pow_end
     mul s0, s0, a0
@@ -86,6 +89,9 @@ naive_pow_loop:
 naive_pow_end:
     mv a0, s0
     # BEGIN EPILOGUE
+	lw s0, 0(sp)
+	lw ra, 4(sp)
+	addi sp, sp, 8
     # END EPILOGUE
     ret
 
@@ -100,8 +106,10 @@ inc_arr:
     #
     # FIXME What other registers need to be saved?
     #
-    addi sp, sp, -4
+    addi sp, sp, -12
     sw ra, 0(sp)
+	sw s0, 4(sp)
+	sw s1, 8(sp)
     # END PROLOGUE
     mv s0, a0 # Copy start of array to saved register
     mv s1, a1 # Copy length of array to saved register
@@ -116,14 +124,22 @@ inc_arr_loop:
     # Hint: What does the "t" in "t0" stand for?
     # Also ask yourself this: why don't we need to preserve t1?
     #
+	addi sp, sp, -4
+	sw t0, 0(sp)
+
     jal helper_fn
+
+	lw t0, 0(sp)
+	addi sp, sp, 4
     # Finished call for helper_fn
     addi t0, t0, 1 # Increment counter
     j inc_arr_loop
 inc_arr_end:
     # BEGIN EPILOGUE
     lw ra, 0(sp)
-    addi sp, sp, 4
+	lw s0, 4(sp)
+	lw s1, 8(sp)
+    addi sp, sp, 12
     # END EPILOGUE
     ret
 
@@ -138,9 +154,9 @@ inc_arr_end:
 helper_fn:
     # BEGIN PROLOGUE
     # END PROLOGUE
-    lw t1, 0(a0)
-    addi s0, t1, 1
-    sw s0, 0(a0)
+    lw t1, 0(a0)   #t1 = a0[0]
+    addi t1, t1, 1 #t0 = t1 + 1
+    sw t1, 0(a0)   #a0[0] = t0
     # BEGIN EPILOGUE
     # END EPILOGUE
     ret

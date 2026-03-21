@@ -21,8 +21,8 @@ static void allocation_failed() {
 /* Bad example of how to create a new vector */
 vector_t *bad_vector_new() {
     /* Create the vector and a pointer to it */
-    vector_t *retval, v;
-    retval = &v;
+    vector_t *retval, v; //在栈上分配了一个结构体,并且声明了一个指针变量,指针变量没有被初始化
+    retval = &v;//返回栈上变量的地址,函数结束后这个地址就不再有效了
 
     /* Initialize attributes */
     retval->size = 1;
@@ -32,7 +32,7 @@ vector_t *bad_vector_new() {
     }
 
     retval->data[0] = 0;
-    return retval;
+    return retval;//返回指向栈上的指针
 }
 
 /* Another suboptimal way of creating a vector 栈分配*/
@@ -47,7 +47,7 @@ vector_t also_bad_vector_new() {
         allocation_failed();
     }
     v.data[0] = 0;
-    return v; //返回整个结构体副本,整个结构体都被复制了一边返回
+    return v; //返回整个结构体副本,整个结构体都被复制了一边返回（副本还是在栈里面）
 }
 
 /* Create a new vector with a size (length) of 1
@@ -129,7 +129,7 @@ void vector_set(vector_t *v, size_t loc, int value) {
 			allocation_failed();
 		}
 		//初始化刚分配的值(好习惯)
-		for(size_t i = v->size; i < loc; i++){//不等于0的原因是后面会给那个位置值不需要初始化
+		for(size_t i = v->size; i < loc; i++){ //不等于0的原因是后面会给那个位置值不需要初始化
 			v->data[i] = 0;
 		}
 
