@@ -5,8 +5,8 @@ n: .word 8
 
 .text
 main:
-    la t0, n
-    lw a0, 0(t0)
+    la t0, n          #t0 = &n
+    lw a0, 0(t0)      #a0 = 8
     jal ra, factorial
 
     addi a1, a0, 0
@@ -21,4 +21,16 @@ main:
     ecall # Exit
 
 factorial:
-    # YOUR CODE HERE
+	addi t2, x0, 1 #结果
+	addi t1, x0, 0 #计数器
+	mv t0, a0      #循环次数
+
+loop:
+	addi t1, t1, 1 
+	mul t2, t2, t1
+	beq t1, t0, return
+	j loop
+return:
+	mv a0, t2
+	ret
+
