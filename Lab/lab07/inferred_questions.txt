@@ -1,0 +1,66 @@
+========================================
+Exercise 1 (Task 1) - 推断题目 (Scenario 格式)
+========================================
+
+Scenario 1
+    1. 根据给定的步长与缓存参数，命中率的来源是什么？请解释“为什么会出现该命中率”。
+    2. 如果将 Rep Count 任意增大，命中率会如何变化？请给出原因（提示：容量/冲突未命中）。
+    3. 通过修改一个“程序参数”（如步长或数组大小），怎样提高命中率？说明理由。
+
+Scenario 2
+    1. 内层循环每次迭代发生多少次内存访问？请说明涉及的读/写次数。
+    2. 命中/未命中模式是什么（例如周期性的模式）？请解释产生该模式的原因。
+    3. 根据该模式，整体命中率应是多少？
+
+Scenario 3
+    1. 在两级缓存（L1/L2）下，L1 命中率、L2 命中率以及 Overall 命中率分别是多少？
+    2. 总共访问 L1 缓存的次数是多少？其中 Miss 的次数是多少？
+    3. 访问 L2 缓存的次数是多少？
+    4. 若只允许修改一个“程序参数”，用哪一个更合理地提升命中率？
+    5. 当改变某个缓存参数时，命中率的变化趋势如何？用符号（例如 =、+、-）概括。
+
+--- lines below are ignored by the AG ---
+
+Checkoff Question 1:
+Checkoff Question 2:
+Checkoff Question 3:
+Checkoff Question 4:
+Checkoff Question 5:
+
+
+========================================
+Exercise 2 (Task 2) - 推断题目
+========================================
+
+1. 对于 1000x1000 的矩阵，哪两种循环顺序表现最好？为什么？
+2. 哪两种循环顺序表现最差？为什么？
+
+--- lines below are ignored by the AG ---
+
+Checkoff Question 1:
+Checkoff Question 2:
+Checkoff Question 3:
+
+
+========================================
+Exercise 3 (Task 3) - 推断题目
+========================================
+
+Part 1
+    blocksize = 20, n = 100:
+    blocksize = 20, n = 1000:
+    blocksize = 20, n = 2000:
+    blocksize = 20, n = 5000:
+    blocksize = 20, n = 10000:
+
+    Checkoff Question 1:
+    Checkoff Question 2:
+
+Part 2
+    blocksize = 50, n = 10000:
+    blocksize = 100, n = 10000:
+    blocksize = 500, n = 10000:
+    blocksize = 1000, n = 10000:
+    blocksize = 5000, n = 10000:
+
+    Checkoff Question 3:

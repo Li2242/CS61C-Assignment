@@ -23,14 +23,7 @@ void set_bit(unsigned * x,
 // Assume 0 <= n <= 31
 void flip_bit(unsigned * x,
               unsigned n) {
-	//用xor更优美 和1异或去反 和0异或不变
+
 	*x = *x ^ (1 << n);
-	
-	//不优美
-    // if( (*x >> n) & 1){//1 -> 0
-	// 	*x = *x & ~(1 << n);
-	// }else{//0 -> 1
-	// 	*x = *x | (1 << n);
-	// }
 }
 

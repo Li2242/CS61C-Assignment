@@ -43,8 +43,8 @@ main:	li	a0, 256		# array size in BYTES (power of 2 < array size)
 #  s1 = array limit (ptr)
 
 accessWords:
-	la	s0, array		# ptr to array
-	add	s1, s0, a0		# hardcode array limit (ptr)
+	la	s0, array		    # ptr to array
+	add	s1, s0, a0		    # hardcode array limit (ptr)
 	slli	t1, a1, 2		# multiply stepsize by 4 because WORDS
 wordLoop:
 	beq	a3, zero,  wordZero
@@ -81,7 +81,7 @@ byteZero:
 	sb	zero,  0(s0)		# array[index] = 0
 
 byteCheck:
-	add	s0, s0, a1		# increment ptr
+	add	s0, s0, a1			# increment ptr
 	blt	s0, s1, byteLoop	# inner loop done?
 
 	addi	a2, a2, -1

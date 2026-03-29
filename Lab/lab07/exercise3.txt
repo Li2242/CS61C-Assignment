@@ -7,8 +7,8 @@ Part 1
     blocksize = 20, n = 5000: 
     blocksize = 20, n = 10000: 
 
-    Checkoff Question 1:
-    Checkoff Question 2:
+    Checkoff Question 1:差距越来越大
+    Checkoff Question 2:这个时候cache可以缓存下所有内容
 
 Part 2
     blocksize = 50, n = 10000:
@@ -17,4 +17,57 @@ Part 2
     blocksize = 1000, n = 10000:
     blocksize = 5000, n = 10000:
 
-    Checkoff Question 3:
+    Checkoff Question 3:不是,在一定事件后会下降,达到缓存上线的时候就和正常一样了
+
+
+
+==========================================
+Part 1: blocksize = 20, varying n
+==========================================
+
+Testing n = 100, blocksize = 20
+Testing naive transpose: 0.012 milliseconds
+Testing transpose with blocking: 0.013 milliseconds
+
+Testing n = 1000, blocksize = 20
+Testing naive transpose: 13.852 milliseconds
+Testing transpose with blocking: 3.621 milliseconds
+
+Testing n = 2000, blocksize = 20
+Testing naive transpose: 38.967 milliseconds
+Testing transpose with blocking: 9.417 milliseconds
+
+Testing n = 5000, blocksize = 20
+Testing naive transpose: 351.553 milliseconds
+Testing transpose with blocking: 129.886 milliseconds
+
+Testing n = 10000, blocksize = 20
+Testing naive transpose: 1573.12 milliseconds
+Testing transpose with blocking: 319.807 milliseconds
+
+
+==========================================
+Part 2: n = 10000, varying blocksize
+==========================================
+
+Testing n = 10000, blocksize = 50
+Testing naive transpose: 1625.54 milliseconds
+Testing transpose with blocking: 301.23 milliseconds
+
+Testing n = 10000, blocksize = 100
+Testing naive transpose: 1435.62 milliseconds
+Testing transpose with blocking: 201.46 milliseconds
+
+Testing n = 10000, blocksize = 500
+Testing naive transpose: 2321.94 milliseconds
+Testing transpose with blocking: 341.916 milliseconds
+
+Testing n = 10000, blocksize = 1000
+Testing naive transpose: 1445.87 milliseconds
+Testing transpose with blocking: 1374.5 milliseconds
+
+Testing n = 10000, blocksize = 5000
+Testing naive transpose: 1440.51 milliseconds
+Testing transpose with blocking: 1416.77 milliseconds
+
+All tests completed!

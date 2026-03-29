@@ -1,0 +1,56 @@
+========================================
+Exercise 1 (Task 1) - Venus Cache Simulator
+========================================
+
+Scenario 1
+    1. 是什么参数组合导致了你所观察到的命中率？(提示：考虑 Block Size 8字节 与 Step Size 1个word=4字节 之间的关系，一个Block可以装几个元素？)
+    2. 如果我们随意增加 Rep Count（重复遍历次数），命中率会变成多少？为什么？(提示：对比数组总大小 256字节 和 Cache总容量 4*8=32字节 的关系，能全部存下吗？)
+    3. 我们可以在汇编代码中修改哪个“程序参数”（a0-a3）来提高命中率？
+
+Scenario 2
+    1. 每次内层循环迭代包含了多少次内存访问操作？(提示：Option为0时只有 store 写操作)
+    2. 重复的 Hit/Miss（命中/未命中）规律是什么？为什么会这样？(提示：现在的 Step Size 是 2个word=8字节，刚好等于 Block Size。每次访问都会怎样？)
+    3. 基于上面的规律，命中率应该是多少？(用 Venus 验证你的想法)
+
+Scenario 3
+    1. 每次内层循环迭代包含了多少次内存访问操作？(提示：Option为1时包含 load 和 store 操作)
+    2. 重复的 Hit/Miss 规律是什么？(提示：读某个新地址会发生 Miss，紧接着同一循环内写这个地址会怎样？)
+    3. 基于上面的规律，命中率应该是多少？
+    4. 随着 Rep Count 的增加，命中率会发生什么变化？为什么？
+    5. 如果可以修改 Venus 中的“缓存硬件参数”（Cache Levels, Block Size, Number of Blocks 等），怎么改可以提高命中率？
+
+--- Checkoff Questions (Task 1) ---
+Checkoff 1: Scenario 1 中是什么类型的局部性起到了作用？
+Checkoff 2: Scenario 2 发生了什么现象导致命中率如此糟糕？
+Checkoff 3: 在 Scenario 3 中，读和写操作是如何影响缓存状态的？
+Checkoff 4: & Checkoff 5: 结合缓存参数调整总结你的发现。
+
+========================================
+Exercise 2 (Task 2) - Matrix Multiplication
+========================================
+
+1. 对于这些 1000x1000 的矩阵，哪种或哪几种循环顺序执行得最快？为什么？
+   (提示：考虑哪个循环在最内层能让所有的数组都尽量沿“行”顺序访问，拥有最好的 Spatial Locality)
+2. 哪种或哪几种循环顺序执行得最慢？为什么？
+   (提示：哪种最内层循环导致了严重的“跳跃访问” / Strided Access，造成了海量的 Cache Miss？)
+
+--- Checkoff Questions (Task 2) ---
+Checkoff 1: 在最内层循环中跨越（striding）内存中数组元素的方式，是如何影响程序整体性能的？
+Checkoff 2: C 语言是以 Row-Major (行优先) 还是 Column-Major (列优先) 的方式在内存中存储多维数组的？
+Checkoff 3: 根据你的观察，编译器在不同层级的循环重排中能否完全自动帮你优化这些问题？
+
+========================================
+Exercise 3 (Task 3) - Cache Blocking
+========================================
+
+Part 1 (固定 blocksize = 20，不断增大 N)
+    填写不同 N 大小下的耗时表现，观察 Naive 和 Blocking 版本耗时差距的扩大。
+
+    Checkoff Question 1: 随着矩阵边长 N 增大，Naive 和 Blocking 的性能差距有什么变化规律？
+    Checkoff Question 2: 为什么在 N 比较小的时候，Blocking 并没有体现出太大的优势（甚至更慢）？
+
+Part 2 (固定 N = 10000，不断改变 blocksize)
+    填写不同 blocksize 下的耗时表现，寻找最佳的分块大小 (Sweet Spot)。
+
+    Checkoff Question 3:
+    随着 blocksize 从小逐渐变大（50 -> 100 -> 500...），性能是单调提升的吗？当 blocksize 大到一定程度后发生了什么？为什么？(提示：考虑 CPU L1 Cache 的物理容量上限)
